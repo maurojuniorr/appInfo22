@@ -1,45 +1,41 @@
-import { View, Text, Image, TextInput, } from "react-native";
-import styles from './estilo'
+import { View, Text, Image, TextInput, TouchableOpacity } from 'react-native'; //importar bibliotecas
+import styles from './estilo';
+import React, { useState } from 'react'; //é uma variavel de estado
 
-import React, { useState } from 'react';
+export default function Login({ navigation }) {
+	const [password, setPassword] = useState('');
+	const [email, setEmail] = useState('');
 
+	return (
+		<View style={styles.container}>
+			<View style={styles.logoContainer}>
+				<Image style={styles.img} source={require('../images/achei.png')} />
+			</View>
+			<View style={styles.inputContainer}>
+				{/*View onde ficam os inputs de email e senha */}
 
-
-export default function Login(){
-    const [password, setPassword] = useState(''); //variaveis de estado podem mudar em tempo de execução
-    const [email, setEmail] = useState('')
-    
-    return(
-        <View style={styles.container}>
-            <View style = {styles.logoContainer}>
-                <Image style = {styles.img} 
-                    source={require('../images/achei.png')} />
-            </View>
-            <View style={styles.inputContainer}>
-            <Text>Nossa variavel de estado >> {email}</Text>
-                <TextInput 
-                    placeholder="Digite seu email"
-                    style={styles.input}
-				    value={email} //Valor da variavel
+				<Text style={styles.inputLabel}>Email </Text>
+				<TextInput
+					style={styles.input}
+					placeholder='Insira seu email'
+					value={email}
 					onChangeText={setEmail}
-                />
-                <Text>Nossa variavel de estado >> {password}</Text>
+				/>
+				<Text style={styles.inputLabel}>Senha</Text>
 
-                <TextInput 
-                    placeholder="Digite sua senha"
-                    style={styles.input}
-				    value={password} //Valor da variavel
+				<TextInput
+					style={styles.input}
+					placeholder='Insira sua senha'
+					value={password}
 					onChangeText={setPassword}
-                    secureTextEntry={true}                    
-                />
-              
+				/>
+			</View>
 
-                
-            </View>
-            <View style={styles.signupContainer}>
-                <Text> Não tem login? Faça seu cadastro! Clique Aqui</Text>
-            </View>
-            
-        </View>
-    );
+			<View style={styles.signupContainer}>
+				<TouchableOpacity onPress={() => navigation.navigate('Signup')}>
+					<Text style={styles.buttonTextRegister}>Registrar-se</Text>
+				</TouchableOpacity>
+			</View>
+		</View>
+	);
 }
